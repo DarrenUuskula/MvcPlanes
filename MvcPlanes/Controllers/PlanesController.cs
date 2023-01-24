@@ -65,21 +65,20 @@ namespace MvcPlanes.Controllers
             return View(Plane);
         }
 
-        // GET: Plane/Edit/5
+        // GET: Movies/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Planes == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var Planes = await _context.Planes.FindAsync(id);
-            if (Planes == null)
+            var movie = await _context.Planes.FindAsync(id);
+            if (movie == null)
             {
                 return NotFound();
             }
-            return View(
-                );
+            return View(movie);
         }
 
         // POST: Plane/Edit/5
