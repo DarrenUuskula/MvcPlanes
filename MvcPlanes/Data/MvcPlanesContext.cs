@@ -14,6 +14,6 @@ namespace MvcPlanes.Data
         {
         }
 
-        public DbSet<MvcPlanes.Models.Planes> Planes { get; set; } = default!;
+        public DbSet<MvcPlanes.Models.Planes> Planes { get; set; }
     }
 }

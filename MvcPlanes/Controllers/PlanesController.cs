@@ -19,13 +19,13 @@ namespace MvcPlanes.Controllers
             _context = context;
         }
 
-        // GET: Planes
+        // GET: Plane
         public async Task<IActionResult> Index()
         {
               return View(await _context.Planes.ToListAsync());
         }
 
-        // GET: Planes/Details/5
+        // GET: Plane/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Planes == null)
@@ -33,39 +33,39 @@ namespace MvcPlanes.Controllers
                 return NotFound();
             }
 
-            var planes = await _context.Planes
+            var Plane = await _context.Planes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (planes == null)
+            if (Plane == null)
             {
                 return NotFound();
             }
 
-            return View(planes);
+            return View(Plane);
         }
 
-        // GET: Planes/Create
+        // GET: Plane/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Planes/Create
+        // POST: Plane/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price")] Planes planes)
+        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price")] Planes Plane)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(planes);
+                _context.Add(Plane);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(planes);
+            return View(Plane);
         }
 
-        // GET: Planes/Edit/5
+        // GET: Plane/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Planes == null)
@@ -73,22 +73,23 @@ namespace MvcPlanes.Controllers
                 return NotFound();
             }
 
-            var planes = await _context.Planes.FindAsync(id);
-            if (planes == null)
+            var Planes = await _context.Planes.FindAsync(id);
+            if (Planes == null)
             {
                 return NotFound();
             }
-            return View(planes);
+            return View(
+                );
         }
 
-        // POST: Planes/Edit/5
+        // POST: Plane/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price")] Planes planes)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price")] Planes Planes)
         {
-            if (id != planes.Id)
+            if (id != Planes.Id)
             {
                 return NotFound();
             }
@@ -97,12 +98,12 @@ namespace MvcPlanes.Controllers
             {
                 try
                 {
-                    _context.Update(planes);
+                    _context.Update(Planes);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PlanesExists(planes.Id))
+                    if (!PlaneExists(Planes.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +114,10 @@ namespace MvcPlanes.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(planes);
+            return View(Planes);
         }
 
-        // GET: Planes/Delete/5
+        // GET: Plane/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Planes == null)
@@ -124,36 +125,36 @@ namespace MvcPlanes.Controllers
                 return NotFound();
             }
 
-            var planes = await _context.Planes
+            var Planes = await _context.Planes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (planes == null)
+            if (Planes == null)
             {
                 return NotFound();
             }
 
-            return View(planes);
+            return View(Planes);
         }
 
-        // POST: Planes/Delete/5
+        // POST: Plane/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Planes == null)
             {
-                return Problem("Entity set 'MvcPlanesContext.Planes'  is null.");
+                return Problem("Entity set 'MvcPlaneContext.Plane'  is null.");
             }
-            var planes = await _context.Planes.FindAsync(id);
-            if (planes != null)
+            var Plane = await _context.Planes.FindAsync(id);
+            if (Plane != null)
             {
-                _context.Planes.Remove(planes);
+                _context.Planes.Remove(Plane);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PlanesExists(int id)
+        private bool PlaneExists(int id)
         {
           return _context.Planes.Any(e => e.Id == id);
         }
