@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MvcPlanes.Data;
 
@@ -11,9 +12,11 @@ using MvcPlanes.Data;
 namespace MvcPlanes.Migrations
 {
     [DbContext(typeof(MvcPlanesContext))]
-    partial class MvcPlanesContextModelSnapshot : ModelSnapshot
+    [Migration("20230124231238_Rating")]
+    partial class Rating
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
