@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using MvcPlanes.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<MvcPlanesContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MvcPlanesContext") ?? throw new InvalidOperationException("Connection string 'MvcPlanesContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
