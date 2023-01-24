@@ -19,18 +19,33 @@ namespace MvcPlanes.Controllers
             _context = context;
         }
 
-        // GET: Plane
-        public async Task<IActionResult> Index(string searchString)
+        // GET: Planes
+        public async Task<IActionResult> Index(string PlanesGenre, string searchString)
         {
+            // Use LINQ to get list of genres.
+            IQueryable<string> genreQuery = from m in _context.Planes
+                                            orderby m.Genre
+                                            select m.Genre;
             var Planes = from m in _context.Planes
                          select m;
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchString))
             {
                 Planes = Planes.Where(s => s.Title!.Contains(searchString));
             }
 
-            return View(await Planes.ToListAsync());
+            if (!string.IsNullOrEmpty(PlanesGenre))
+            {
+                Planes = Planes.Where(x => x.Genre == PlanesGenre);
+            }
+
+            var PlanesGenreVM = new PlanesGenreViewModel
+            {
+                Genres = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                Planes = await Planes.ToListAsync()
+            };
+
+            return View(PlanesGenreVM);
         }
 
         // GET: Plane/Details/5
