@@ -14,38 +14,39 @@ namespace MvcPlanes.Controllers
     {
         private readonly MvcPlanesContext _context;
 
+        public string? PlanesCategory { get; private set; }
+
         public PlanesController(MvcPlanesContext context)
         {
             _context = context;
         }
 
         // GET: Planes
-        public async Task<IActionResult> Index(string PlanesGenre, string searchString)
+        public async Task<IActionResult> Index(string Plane, string searchString)
         {
-            // Use LINQ to get list of genres.
-            IQueryable<string> genreQuery = from m in _context.Planes
-                                            orderby m.Genre
-                                            select m.Genre;
+            // Use LINQ to get list of Categorys.
+            IQueryable<string> CategoryQuery = from m in _context.Planes
+                                            orderby m.Category
+                                            select m.Category;
             var Planes = from m in _context.Planes
                          select m;
-
             if (!string.IsNullOrEmpty(searchString))
             {
-                Planes = Planes.Where(s => s.Title!.Contains(searchString));
+                Planes = Planes.Where(s => s.Name!.Contains(searchString));
             }
 
-            if (!string.IsNullOrEmpty(PlanesGenre))
+            if (!string.IsNullOrEmpty(PlanesCategory))
             {
-                Planes = Planes.Where(x => x.Genre == PlanesGenre);
+                Planes = Planes.Where(x => x.Category == PlanesCategory);
             }
 
-            var PlanesGenreVM = new PlanesGenreViewModel
+            var PlanesCategoryVM = new PlanesCategoryViewModel
             {
-                Genres = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                Categorys = new SelectList(await CategoryQuery.Distinct().ToListAsync()),
                 Planes = await Planes.ToListAsync()
             };
 
-            return View(PlanesGenreVM);
+            return View(PlanesCategoryVM);
         }
 
         // GET: Plane/Details/5
@@ -77,7 +78,7 @@ namespace MvcPlanes.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Planes Plane)
+        public async Task<IActionResult> Create([Bind("Id,Name,ReleaseDate,Category,Price,Safety")] Planes Plane)
         {
             if (ModelState.IsValid)
             {
@@ -109,7 +110,7 @@ namespace MvcPlanes.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Planes Planes)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Category,Price,Safety")] Planes Planes)
         {
             if (id != Planes.Id)
             {

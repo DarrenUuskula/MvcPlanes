@@ -24,38 +24,38 @@ namespace MvcPlanes.Models
                 context.Planes.AddRange(
                     new Planes
                     {
-                        Title = "When Harry Met Sally",
+                        Name = "Hawker Hurricane",
                         ReleaseDate = DateTime.Parse("1989-2-12"),
-                        Genre = "Romantic Comedy",
-                        Rating = "R",
-                        Price = 7.99M
+                        Category = "Turboprop commercial aircraft",
+                        Safety ="S",
+                        Price = 776500
                     },
 
                     new Planes
                     {
-                        Title = "Ghostbusters ",
+                        Name = "Boeing 737",
                         ReleaseDate = DateTime.Parse("1984-3-13"),
-                        Genre = "Comedy",
-                        Rating = "R",
-                        Price = 8.99M
+                        Category = "Small passenger jet aircraft",
+                        Safety = "S",
+                        Price = 98800
                     },
 
                     new Planes
                     {
-                        Title = "Ghostbusters 2",
+                        Name = "Airbus A220",
                         ReleaseDate = DateTime.Parse("1986-2-23"),
-                        Genre = "Comedy",
-                        Rating = "R",
-                        Price = 9.99M
+                        Category = "Medium passenger aircraft",
+                        Safety = "S",
+                        Price = 233000
                     },
 
                     new Planes
                     {
-                        Title = "Rio Bravo",
+                        Name = "Airbus A320",
                         ReleaseDate = DateTime.Parse("1959-4-15"),
-                        Genre = "Western",
-                        Rating = "R",
-                        Price = 3.99M
+                        Category = "Large passenger jet aircraft",
+                        Safety = "D",
+                        Price = 300000
                     }
                 );
                 context.SaveChanges();
