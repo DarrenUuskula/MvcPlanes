@@ -22,10 +22,10 @@ namespace MvcPlanes.Controllers
         }
 
         // GET: Planes
-        public async Task<IActionResult> Index(string Plane, string searchString)
+        public async Task<IActionResult> Index(string plane, string searchString)
         {
             // Use LINQ to get list of Categorys.
-            IQueryable<string> CategoryQuery = from m in _context.Planes
+            IQueryable<string> categoryQuery = from m in _context.Planes
                                             orderby m.Category
                                             select m.Category;
             var Planes = from m in _context.Planes
@@ -42,7 +42,7 @@ namespace MvcPlanes.Controllers
 
             var PlanesCategoryVM = new PlanesCategoryViewModel
             {
-                Categorys = new SelectList(await CategoryQuery.Distinct().ToListAsync()),
+                Categorys = new SelectList(await categoryQuery.Distinct().ToListAsync()),
                 Planes = await Planes.ToListAsync()
             };
 
@@ -78,15 +78,15 @@ namespace MvcPlanes.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ReleaseDate,Category,Price,Safety")] Planes Plane)
+        public async Task<IActionResult> Create([Bind("Id,Name,ReleaseDate,Category,Price,Safety")] Planes plane)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(Plane);
+                _context.Add(plane);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(Plane);
+            return View(plane);
         }
 
         // GET: Movies/Edit/5
@@ -110,9 +110,9 @@ namespace MvcPlanes.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Category,Price,Safety")] Planes Planes)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Category,Price,Safety")] Planes planes)
         {
-            if (id != Planes.Id)
+            if (id != planes.Id)
             {
                 return NotFound();
             }
@@ -121,12 +121,12 @@ namespace MvcPlanes.Controllers
             {
                 try
                 {
-                    _context.Update(Planes);
+                    _context.Update(planes);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PlaneExists(Planes.Id))
+                    if (!PlaneExists(planes.Id))
                     {
                         return NotFound();
                     }
@@ -137,7 +137,7 @@ namespace MvcPlanes.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(Planes);
+            return View(planes);
         }
 
         // GET: Plane/Delete/5

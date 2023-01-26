@@ -15,7 +15,9 @@
             <option value="">All</option>
         </select>
 
-         Name: <input type="text" asp-for="SearchString" />
+        <label asp-for="Name"></label>
+        <input asp-for="Name"/>
+        <span asp-validation-for="Name" class="text-danger"></span>
         <input type="submit" value="Filter" />
     </p>
 </form>
