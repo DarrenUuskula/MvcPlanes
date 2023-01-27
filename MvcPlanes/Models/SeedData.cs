@@ -22,7 +22,7 @@ namespace MvcPlanes.Models
                 }
 
                 context.Planes.AddRange(
-                    new Planes
+                    new Plane
                     {
                         Name = "Hawker Hurricane",
                         ReleaseDate = DateTime.Parse("1989-2-12"),
@@ -31,7 +31,7 @@ namespace MvcPlanes.Models
                         Price = 776500
                     },
 
-                    new Planes
+                    new Plane
                     {
                         Name = "Boeing 737",
                         ReleaseDate = DateTime.Parse("1984-3-13"),
@@ -40,7 +40,7 @@ namespace MvcPlanes.Models
                         Price = 98800
                     },
 
-                    new Planes
+                    new Plane
                     {
                         Name = "Airbus A220",
                         ReleaseDate = DateTime.Parse("1986-2-23"),
@@ -49,7 +49,7 @@ namespace MvcPlanes.Models
                         Price = 233000
                     },
 
-                    new Planes
+                    new Plane
                     {
                         Name = "Airbus A320",
                         ReleaseDate = DateTime.Parse("1959-4-15"),

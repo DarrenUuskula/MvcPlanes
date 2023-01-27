@@ -78,7 +78,7 @@ namespace MvcPlanes.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ReleaseDate,Category,Price,Safety")] Planes plane)
+        public async Task<IActionResult> Create([Bind("Id,Name,ReleaseDate,Category,Price,Safety")] Plane plane)
         {
             if (ModelState.IsValid)
             {
@@ -110,7 +110,7 @@ namespace MvcPlanes.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Category,Price,Safety")] Planes planes)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Category,Price,Safety")] Plane planes)
         {
             if (id != planes.Id)
             {

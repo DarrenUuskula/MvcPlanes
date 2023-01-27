@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MvcPlanes.Models
 {
-    public class Planes
+    public class Plane
     {
         public int Id { get; set; }
 
