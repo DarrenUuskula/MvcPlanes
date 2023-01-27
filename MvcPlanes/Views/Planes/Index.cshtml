@@ -11,13 +11,13 @@
 </p>
 <form asp-controller="Planes" asp-action="Index" method="get">
     <p>
+        <label asp-for="PlanesCategory">Category:</label>
         <select asp-for="PlanesCategory" asp-items="Model.Categorys">
             <option value="">All</option>
         </select>
 
-        <label asp-for="Name"></label>
-        <input asp-for="Name"/>
-        <span asp-validation-for="Name" class="text-danger"></span>
+        <label asp-for="SearchString">Name:</label>
+        <input asp-for="SearchString"/>
         <input type="submit" value="Filter" />
     </p>
 </form>

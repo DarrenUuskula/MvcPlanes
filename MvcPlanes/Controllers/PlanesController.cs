@@ -14,39 +14,41 @@ namespace MvcPlanes.Controllers
     {
         private readonly MvcPlanesContext _context;
 
-        public string? PlanesCategory { get; private set; }
-
         public PlanesController(MvcPlanesContext context)
         {
             _context = context;
         }
 
         // GET: Planes
-        public async Task<IActionResult> Index(string plane, string searchString)
+        public async Task<IActionResult> Index(string planesCategory, string searchString)
         {
+            if (_context.Planes == null)
+            {
+                return Problem("Entity set 'MvcPlaneContext.Movie'  is null.");
+            }
             // Use LINQ to get list of Categorys.
             IQueryable<string> categoryQuery = from m in _context.Planes
                                             orderby m.Category
                                             select m.Category;
-            var Planes = from m in _context.Planes
+            var planes = from m in _context.Planes
                          select m;
             if (!string.IsNullOrEmpty(searchString))
             {
-                Planes = Planes.Where(s => s.Name!.Contains(searchString));
+                planes = planes.Where(s => s.Name!.Contains(searchString));
             }
 
-            if (!string.IsNullOrEmpty(PlanesCategory))
+            if (!string.IsNullOrEmpty(planesCategory))
             {
-                Planes = Planes.Where(x => x.Category == PlanesCategory);
+                planes = planes.Where(x => x.Category == planesCategory);
             }
 
-            var PlanesCategoryVM = new PlanesCategoryViewModel
+            var planesCategoryVM = new PlanesCategoryViewModel
             {
                 Categorys = new SelectList(await categoryQuery.Distinct().ToListAsync()),
-                Planes = await Planes.ToListAsync()
+                Planes = await planes.ToListAsync()
             };
 
-            return View(PlanesCategoryVM);
+            return View(planesCategoryVM);
         }
 
         // GET: Plane/Details/5
